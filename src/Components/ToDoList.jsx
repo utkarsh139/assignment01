@@ -86,13 +86,19 @@ const visibleTasks = useMemo(() => {
 }, [tasks, filter, searchQuery]);
 
 
+
   return (
-    <div className='to-do-list'>
-      <h2>My list</h2>
-      <div className='filters'>
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg gap-6">
+      <h2 className="text-2xl font-bold text-center mb-4">My list</h2>
+      <div className="flex justify-center gap-2 mb-4">
          <button
           onClick={() => setFilter("ALL")}
           disabled={filter === "ALL"}
+          className={`px-3 py-1 rounded-md text-sm
+    ${filter === "ALL"
+      ? "bg-red-600 text-white cursor-not-allowed"
+      : "bg-gray-200 hover:bg-gray-300"}
+  `}
         >
           All
         </button>
@@ -100,6 +106,11 @@ const visibleTasks = useMemo(() => {
         <button
           onClick={() => setFilter("COMPLETED")}
           disabled={filter === "COMPLETED"}
+          className={`px-3 py-1 rounded-md text-sm
+    ${filter === "COMPLETED"
+      ? "bg-red-600 text-white cursor-not-allowed"
+      : "bg-gray-200 hover:bg-gray-300"}
+  `}
         >
           Completed
         </button>
@@ -107,29 +118,35 @@ const visibleTasks = useMemo(() => {
         <button
           onClick={() => setFilter("PENDING")}
           disabled={filter === "PENDING"}
+          className={`px-3 py-1 rounded-md text-sm
+    ${filter === "PENDING"
+      ? "bg-red-600 text-white cursor-not-allowed"
+      : "bg-gray-200 hover:bg-gray-300"}
+  `}
         >
           Pending
         </button>
       </div>
 
-      <div>
+      <div className='flex gap-2 mb-4'>
         <input
           type="text"
           placeholder='Enter a task'
           value={newTask}
           onChange={handleInputChange}
+          className="flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
 
         />
 
-        <button className='add-button'
+        <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
           onClick={addTask}>
           Add
         </button>
       </div>
 
-      <ol>
+      <ol className="space-y-3">
         {visibleTasks.map((task) => (
-    <li key={task.id}>
+    <li key={task.id} className="flex items-center justify-between p-3 bg-gray-100 rounded-md">
         
 
       {editingTaskId === task.id ? (
@@ -139,26 +156,41 @@ const visibleTasks = useMemo(() => {
             type="text"
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
+            className="px-2 py-1 border rounded-md mr-2"
           />
 
-          <button onClick={saveEdit}>Save</button>
-          <button onClick={cancelEdit}>Cancel</button>
+          <button 
+          onClick={saveEdit}
+          className="px-2 py-1 bg-blue-500 text-white rounded-md mr-1"
+          >
+            Save
+          </button>
+          <button 
+          onClick={cancelEdit}
+          className="px-2 py-1 bg-red-500 text-white rounded-md mr-1"
+          >Cancel
+          </button>
         </>
       ) : (
         <>
-          <span className="text" style={{textDecoration: task.completed? "line-through":"none"}}>{task.text}</span>
+          <span className={`flex-1 ${
+    task.completed ? "line-through text-gray-400" : ""
+  }`}>{task.text}</span>
           <input 
           type="checkbox"
           checked={task.completed}
           onChange={()=>toggleTask(task.id)} />
 
-          <button onClick={() => startEditing(task)}>
+          <button 
+          onClick={() => startEditing(task)}
+          className="text-blue-600 hover:underline mr-2">
             Edit
           </button>
 
           <button
-            className="delete-button"
+            className="text-red-600 hover:underline"
             onClick={() => deleteTask(task.id)}
+
           >
             Delete
           </button>

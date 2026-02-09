@@ -1,6 +1,6 @@
 import React from 'react'
 import ToDoList from './Components/ToDoList.jsx';
-import './index.css'
+
 import { TaskProvider } from './Context/TaskContext.jsx';
 import Navbar from './Components/Navbar.jsx';
 
