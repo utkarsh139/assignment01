@@ -23,12 +23,22 @@ function Navbar(){
         });
     },[debouncedSearchText,dispatch]);
     return(
-        <nav className='nav'>
+        <nav className='flex items-center justify-between p-4 bg-gray-800 text-white shadow-md'>
             <div className="app-name">
-            <h1>Task Manager</h1>
+            <h1 className="text-white text-2xl font-bold">Task Manager</h1>
             </div>
-            <div className="search-bar">
-                <input type="text" value={searchText} onChange={handleSearchChange} placeholder='Search Tasks' />
+            <div className="border border-gray-600 rounded-md px-2 py-1">
+                <input 
+                type="text" 
+                value={searchText} 
+                onChange={handleSearchChange} 
+                placeholder='Search Tasks' 
+                className="px-4 py-2
+                        rounded-lg
+                        outline-none
+                        focus:ring-2 focus:ring-white
+                        text-gray-700"  
+                />
             </div>
         </nav>
 
